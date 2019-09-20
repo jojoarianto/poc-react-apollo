@@ -6,7 +6,7 @@ import { HttpLink } from 'apollo-link-http';
 
 const cache = new InMemoryCache();
 const link = new HttpLink({
-  uri: "https://api.sibiti.co.id/graphql"
+  uri: "https://api.sibiti.co.id/graphql",
 })
 
 const client = new ApolloClient({
@@ -33,12 +33,15 @@ function App() {
           {({ loading, error, data }) => {
             if (loading) return <p>Loading...</p>;
             if (error) return <p>Error :(</p>;
+            console.log(Object.keys(data.getEventById));
 
-            return data.getEventById.map(({ _id, name, institusi }) => (
-              <div key={_id}>
-                <p>{name}: {institusi}</p>
+            return (
+              <div>
+                <p>id: {data.getEventById._id}</p>
+                <p>name: {data.getEventById.name}</p>
+                <p>institusi: {data.getEventById.institusi}</p>
               </div>
-            ));
+            );
           }}
         </Query>
       </div>
