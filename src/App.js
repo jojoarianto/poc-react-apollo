@@ -6,7 +6,7 @@ import { HttpLink } from 'apollo-link-http';
 
 const cache = new InMemoryCache();
 const link = new HttpLink({
-  uri: "https://api.sibiti.co.id/graphql",
+  uri: "https://api.sibiti.co.id/graphql"
 })
 
 const client = new ApolloClient({
@@ -22,10 +22,11 @@ function App() {
         <Query
           query={gql`
             query {
-              getEventById(id:"5cdbdaa35b19283c29540b9b") {
+              getEventById(id:"5d1ee4055b19282cfd2ea44c") {
                 _id
                 name
                 institusi
+                logo
               }
             }
           `}
@@ -40,6 +41,7 @@ function App() {
                 <p>id: {data.getEventById._id}</p>
                 <p>name: {data.getEventById.name}</p>
                 <p>institusi: {data.getEventById.institusi}</p>
+                <p>logo: <img src={data.getEventById.logo} alt="" style={{ width: '100px'}}/>  </p>
               </div>
             );
           }}
